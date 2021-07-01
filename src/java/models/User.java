@@ -5,11 +5,13 @@
  */
 package models;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Chaudhari
  */
-public class User {
+public class User implements Serializable {
     
     private String email;
     private boolean isActive;
