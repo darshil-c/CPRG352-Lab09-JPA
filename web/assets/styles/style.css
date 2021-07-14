@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla&display=swap');
+/*Taken from https://fonts.google.com/specimen/Karla*/
+body {
+    background-image: url("./img/background.png");
+    background-repeat: repeat;
+    font-family: Karla, 'Fjalla One', sans-serif;
+}
+
+div {
+    display: table;
+    width: 15%;
+    margin: auto;
+    background: #a9dabe;
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 2.5%;
+    white-space: nowrap;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+table {
+    display: table-cell;
+}
+
+.tableBorder, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    display: table-cell;
+}
+
+label {
+    font-weight: bold;
+}
+
+h1 {
+    text-align: center;
+}
+
+input, select {
+    margin: 2px;
+}
+
+form {
+    display: inline-block;
+    text-align: center;
+    padding-left: 25%;
+}
+
