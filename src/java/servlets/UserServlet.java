@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.User;
+import models.Role;
 import services.RoleService;
 import services.UserService;
 
@@ -54,13 +55,28 @@ public class UserServlet extends HttpServlet {
             String firstName = (String) request.getParameter("firstname");
             String lastName = (String) request.getParameter("lastname");
             String password = (String) request.getParameter("password");
-            int role = Integer.parseInt(request.getParameter("role"));
+            int roleID = Integer.parseInt(request.getParameter("role"));
             boolean active = Boolean.parseBoolean(request.getParameter("status"));
+            Role role = null;
+            switch (roleID) {
+                case 1:
+                    role = new Role(1, "System Admin");
+                    break;
+                case 2:
+                    role = new Role(2, "Regular User");
+                    break;
+                case 3:
+                    role = new Role(3, "Company Admin");
+                    break;
+                default:
+                    role = new Role(2, "Regular User");
+            }
             try {
                 us.insert(email, active, firstName, lastName, password, role);
             } catch (Exception ex) {
                 request.setAttribute("message", "An error has occured.");
             }
+
         } else if (editUser != null) {
             String email = editUser;
             boolean isActive;
@@ -70,8 +86,8 @@ public class UserServlet extends HttpServlet {
                 request.setAttribute("editfirstname", user.getFirstName());
                 request.setAttribute("editlastname", user.getLastName());
                 request.setAttribute("editpassword", user.getPassword());
-                request.setAttribute("role", user.getRoleId());
-                if (user.isActive()) {
+                request.setAttribute("role", user.getRole().getRoleId());
+                if (user.getActive()) {
                     isActive = true;
                 } else {
                     isActive = false;
@@ -92,8 +108,22 @@ public class UserServlet extends HttpServlet {
             String firstName = (String) request.getParameter("editfirstname");
             String lastName = (String) request.getParameter("editlastname");
             String password = (String) request.getParameter("editpassword");
-            int role = Integer.parseInt(request.getParameter("editrole"));
+            int roleID = Integer.parseInt(request.getParameter("editrole"));
             boolean active = Boolean.parseBoolean(request.getParameter("editstatus"));
+            Role role = null;
+            switch (roleID) {
+                case 1:
+                    role = new Role(1, "System Admin");
+                    break;
+                case 2:
+                    role = new Role(2, "Regular User");
+                    break;
+                case 3:
+                    role = new Role(3, "Company Admin");
+                    break;
+                default:
+                    role = new Role(2, "Regular User");
+            }
             try {
                 us.update(email, active, firstName, lastName, password, role);
             } catch (Exception ex) {

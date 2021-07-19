@@ -7,6 +7,7 @@ package services;
 
 import dataaccess.UserDB;
 import java.util.List;
+import models.Role;
 import models.User;
 
 /**
@@ -27,14 +28,16 @@ public class UserService {
         return user;
     }
     
-    public void insert(String email, boolean isActive, String firstName, String lastName, String password, int roleId) throws Exception {
-        User user = new User(email, isActive, firstName, lastName, password, roleId);
+    public void insert(String email, boolean isActive, String firstName, String lastName, String password, Role role) throws Exception {
+        User user = new User(email, isActive, firstName, lastName, password);
+        user.setRole(role);
         UserDB userDB = new UserDB();
         userDB.insert(user);
     }
     
-    public void update(String email, boolean isActive, String firstName, String lastName, String password, int roleId) throws Exception {
-        User user = new User(email, isActive, firstName, lastName, password, roleId);
+    public void update(String email, boolean isActive, String firstName, String lastName, String password, Role role) throws Exception {
+        User user = new User(email, isActive, firstName, lastName, password);
+        user.setRole(role);
         UserDB userDB = new UserDB();
         userDB.update(user);
     }
@@ -43,7 +46,7 @@ public class UserService {
         User user = new User();
         user.setEmail(email);
         UserDB userDB = new UserDB();
-        userDB.delete(user);
+        userDB.delete(email);
     }
     
 }

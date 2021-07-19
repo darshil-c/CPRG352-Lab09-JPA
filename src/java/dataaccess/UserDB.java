@@ -69,11 +69,12 @@ public class UserDB {
         }
     }
 
-    public void delete(User user) throws Exception {
+    public void delete(String email) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
         try {
+            User user = em.find(User.class, email);
             trans.begin();
             em.remove(user);
             trans.commit();
